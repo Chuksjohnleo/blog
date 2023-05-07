@@ -1,9 +1,9 @@
-import { HomeContextProvider } from '@/context/context';
 import Image from 'next/image';
 import Nav from '@/components/nav';
 import HomePage from '@/components/homePage';
 import Footer from '@/components/footer';
 import Head from 'next/head';
+import Posts from '@/components/posts';
 
 import { MongoClient } from "mongodb";
 
@@ -17,7 +17,7 @@ try {
       const db = client.db("blog");
       const postCollection = db.collection('posts')
    
-      posts = await postCollection.find({}, {projection:{_id:0, postBody: 0}}).toArray()
+      posts = await postCollection.find({}, {projection:{_id: 0, postbody: 0}}).toArray()
       console.log(posts);
       //end
       // const category = db.collection('Learning');
@@ -40,21 +40,30 @@ try {
 
 
 export default function Home({posts}) {
+  console.log(posts);
+  const trendingPosts = [];
+  const latestPosts = [];
 
+  for(let i=0;i<10;i++){
+    if(i<7){
+      latestPosts.push(`latest post ${i}`)
+    }
+    trendingPosts.push(`trending post ${i}`)
+  }
   return (
-    <HomeContextProvider>
+    <>
       <Head>
-        <title>home page of TheBlogingBloggerBlog</title>
+        <title>Posts  TheBlogging</title>
       </Head>
       <div>
-          <Nav path='home' />
+          <Nav />
           <div className='max-w-500'>
-           <HomePage posts={posts} />
+           <Posts posts={posts} />
           </div>
           <div>
             <Footer />
           </div>
       </div>
-    </HomeContextProvider>
+    </>
   )
 }
