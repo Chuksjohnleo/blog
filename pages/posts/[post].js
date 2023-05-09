@@ -18,7 +18,7 @@ export async function getStaticProps({params}){
       const commentCollection = db.collection('postComments');
      
       
-      let body = await category.findOne({id:params.post},{projection:{_id:0}});
+      let body = await category.findOne({id: params.post}, {projection:{_id:0}});
       let comments = await commentCollection.find({postId: params.post},{projection:{_id:0}}).sort({_id: -1}).toArray()
       body.comments = comments;
       console.log(comments,body)
@@ -43,7 +43,7 @@ export async function getStaticPaths() {
       await client.connect();
       const db = client.db("blog");
       const category = db.collection('posts');
-      pathsArr = await category.find({},{projection:{_id:0,id:1}}).toArray();
+      pathsArr = await category.find({},{projection:{_id:0, id:1}}).toArray();
       // console.log(pathsArr)
     } catch (e) {
       console.log(e)

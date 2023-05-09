@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Context } from "./post";
+import { HomeContext } from "@/context/context"; 
 import Link from "next/link";
 
 export default function Reply({Image, reply, handleEditor, shadow, likedReplies}){
