@@ -58,7 +58,7 @@ export async function getStaticPaths() {
     });
 
 // console.log(learning)
-    return {paths,fallback: false}
+    return {paths, fallback: true}
   }
 
 export default function Learning({post}){
