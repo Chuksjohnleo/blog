@@ -1,5 +1,5 @@
 import React, { useState, useEffect,  useContext } from 'react';
-import { Context } from "../context/context";
+import { HomeContext } from "../context/context";
 import Link from 'next/link';
 import Image from 'next/image';
 import Reply from './reply';
@@ -22,7 +22,7 @@ export default function Comment({post, comment, shadow, i}){
       userId: comment.commenterId
     });
     
-    //const userContext =  useContext(Context);
+    const userContext =  useContext(HomeContext);
 
     function resetReplies(reply){
       //console.log(replies.push(reply))
