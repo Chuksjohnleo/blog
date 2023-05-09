@@ -1,5 +1,6 @@
 import { useEffect,useState } from "react";
 import Progress from "./progress";
+import Link from "next/link";
 
 
 export default function Register(){
@@ -59,7 +60,7 @@ export default function Register(){
                         surname: surname,
                         userId: resp.userId
                     }));
-                    // location.href = '/'
+                    location.href = '/'
                 }
                 console.log(resp)
             }
@@ -116,7 +117,7 @@ export default function Register(){
         </div>
         <div className="text-center m-2">
             <span> Registered? </span>
-            <a className="font-bold" href="/login"> Login </a>
+            <Link className="font-bold" href="/login"> Login </Link>
         </div>
         </main>
         

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Progress from "./progress";
+import Link from "next/link";
 
 
 export default function Login(){
@@ -81,7 +82,7 @@ export default function Login(){
         </div>
         <div className="text-center">
             <span>Not Registered?</span>
-            <a className="font-bold" href="/register"> Register</a>
+            <Link className="font-bold" href="/register"> Register</Link>
         </div>
         </main>
        

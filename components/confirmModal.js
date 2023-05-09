@@ -5,7 +5,7 @@ import icon from './images/iconC.svg'
 export default function ConfirmModal({text, handler}){
     
     return(
-        <div className='fixed z-50 inset-0 backdrop-blur p-4 border text-center'>
+        <div style={{zIndex:101}} className='fixed inset-0 backdrop-blur p-4 border text-center'>
          <div className='flex flex-col  justify-center items-center m-3 p-4 text-center'>
             <div className='font-bold text-2xl'>Are you sure you want to {text} ?</div>
             <div className='m-4 font-bold text-3xl flex justify-around'>

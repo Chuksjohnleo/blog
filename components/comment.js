@@ -1,6 +1,6 @@
 import React, { useState, useEffect,  useContext } from 'react';
-import { Context } from "./post";
-import styles from './comment.module.css';
+import { Context } from "../context/context";
+import Link from 'next/link';
 import Image from 'next/image';
 import Reply from './reply';
 import dynamic from "next/dynamic";
@@ -22,7 +22,7 @@ export default function Comment({post, comment, shadow, i}){
       userId: comment.commenterId
     });
     
-    const userContext =  useContext(Context);
+    //const userContext =  useContext(Context);
 
     function resetReplies(reply){
       //console.log(replies.push(reply))
@@ -106,43 +106,42 @@ export default function Comment({post, comment, shadow, i}){
     return(
         <>
        <h1>{comment.commentId}</h1>
-          <div className={styles.commentContainer}>
-            <div className={styles.commenterDetails}>
-             <a href="/#" className={styles.commenterId}>
-                <Image className={styles.shadow} alt={comment.commenter+"pics"} width={30} height={30} src={shadow} />
-                <em className={styles.commenterName} >{comment.commenter?.length<1?'NWANONENYI CHUKWUKA':comment.commenter}</em>
-             </a>
-             { 
-               comment.commenterId !== userContext.user.userId ? <button onClick={(e)=>userContext.follow(e, comment.commenterId)} className={styles.follow}>Follow</button>:
-               ' '
-             }
-             <div className={styles.date}>{date}</div>
-            </div><hr/> 
-            <article className={styles.comment} dangerouslySetInnerHTML={{__html:comment.comment}}/>
-            <div className={styles.actionsContainer}>
-              <button className={styles.likeBtn}>Like</button>
-              <button onClick={()=>handleEditor({
-                          replier: comment.commenter,
-                          replierId: comment.commenterId
-                        })} className={styles.replyBtn}>Reply</button>
+          <div>
+            <div >
+             <Link href="/#">
+                <Image alt={comment.commenter+"pics"} width={30} height={30} src={shadow} />
+                <em >{comment.commenter?.length<1?'NWANONENYI CHUKWUKA':comment.commenter}</em>
+             </Link>
+            
+             <div>{date}</div>
+            <hr/> 
+            <article dangerouslySetInnerHTML={{__html: comment.comment}} />
+            <hr/>
+            <div className='flex justify-around'>
+              <button className='hover:bg-black/5 py-1 px-4'>29 Likes</button>
+              <button className='hover:bg-black/5 py-1 px-4'>400 Replies</button>
             </div>
-            <div className={styles.repliesContainer} >
+            <hr/>
+            <div className='flex justify-around font-bold'>
+               <button className='hover:bg-black/5 py-1 px-4'>Like</button>
+               <button className='hover:bg-black/5 py-1 px-4'>Reply</button>
+            </div>
             {
               replyCount > 0?<button disabled={ repliesIsLoading=== 'yes'?true:false } onClick={(e)=>{
                   getReplies(e);
-                  }} className={styles.repliesBtn} >
+                  }} >
                     <span> {replyCount} </span>
                     <span>{replyCount>1?'Replies':'reply'}</span>
-                    <svg width="30" height="15" viewBox="0 0 1024 1024" className={ repliesIsLoading=== 'yes'?styles.loading+' ': repliesVisiblity==='hidden'?styles.downIcon: styles.downIcon+" "+styles.upIcon}  version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="30" height="15" viewBox="0 0 1024 1024"  version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <path d="M903.232 256l56.768 50.432L512 768 64 306.432 120.768 256 512 659.072z" />
                     </svg>
-                </button>:<span  className={styles.repliesBtn2} >No replies</span>
+                </button>:<span >No replies</span>
               }
-            <div className={repliesVisiblity === 'visible'?styles.normalHeight+" "+styles.replies: styles.replies}>
+            <div>
             {replies.map((reply,i)=>{
             return(
              
-                <div key={reply.replyId} className={styles.reply}>
+                <div key={reply.replyId}>
                     <div>{i+1}</div>
                     <Reply  handleEditor={handleEditor} likedReplies={likedReplies} shadow={shadow} Image={Image} reply={reply} />
                 </div>

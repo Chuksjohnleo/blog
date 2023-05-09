@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import icon from './images/iconC.svg'
+import icon from './images/iconC.svg';
+
 
 export default function Footer(){
     let date = new Date()

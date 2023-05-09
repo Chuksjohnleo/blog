@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+
 export default function Sidebar({theWidth, openAndCloseSidebar}) {
   return (
     <>
@@ -19,11 +22,11 @@ export default function Sidebar({theWidth, openAndCloseSidebar}) {
             </div>
         </div>
         <ul className='m-2'>
-          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><a className="w-full inline-block" href='/login'>Login</a></li>
-          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><a className="w-full inline-block" href='/register'>Register</a></li>
-          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><a className="w-full inline-block" href='/suscribe'>Suscribe</a></li>
-          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><a className="w-full inline-block" href='/notification'>Notification</a></li>
-          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><a className="w-full inline-block" href='/download-our-app'>Download our app</a></li>
+          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><Link className="w-full inline-block" href='/login'>Login</Link></li>
+          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><Link className="w-full inline-block" href='/register'>Register</Link></li>
+          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><Link className="w-full inline-block" href='/suscribe'>Suscribe</Link></li>
+          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><Link className="w-full inline-block" href='/notification'>Notification</Link></li>
+          <li className='border-t p-1 hover:bg-black/80 hover:text-white'><Link className="w-full inline-block" href='/download-our-app'>Download our app</Link></li>
         </ul>
       </div>
       </nav>

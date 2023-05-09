@@ -5,6 +5,7 @@ import Image from "next/image";
 import icon from "./images/iconC.svg";
 import Write from "./images/write";
 import SearchResult from './result';
+import Link from 'next/link';
 
 export default function Nav({path}) {
 console.log(path)
@@ -15,6 +16,8 @@ console.log(path)
   const [sidebarWidth, setSidebarWidth] = useState('w-0');
   const [searchBarDisplay, setSearchBarDisplay] = useState('hidden');
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const [headerZindex, setHeaderZindex] = useState('z-40')
+  const [currentPathClassName, setCurrentPathClassName] = useState('font-bold p-1 bg-black text-white fill-white')
   
   function filterPosts(e){
    const theFilteredPosts = context.posts.filter(post=>{
@@ -45,8 +48,10 @@ console.log(path)
   function openAndCloseSidebar(){
      if(sidebarWidth === 'w-0'){
       setSidebarWidth('w-[70vw]');
+      setHeaderZindex('z-50');
      }else{
        setSidebarWidth('w-0');
+       setHeaderZindex('z-40')
      }
   }
 
@@ -64,7 +69,7 @@ console.log(path)
   }, []);
   return (
     <>
-      <header className="z-40 sticky backdrop-blur bg-white/70 inset-0">
+      <header className={`${headerZindex} sticky backdrop-blur bg-white/70 inset-0`}>
         <div className="flex h-[50px] items-center justify-around border-b">
           <div id="burger">
             <button title="Menu" onClick={openAndCloseSidebar} className="hover:bg-black/80 hover:text-white hover:fill-white p-2">
@@ -130,26 +135,26 @@ console.log(path)
            </div>
         </div>:''}
         {/* <div className='fixed top-[90px] overflow-auto max-h-[60vh] p-2 font-semibold border w-full bg-red-800'> <SearchResult postTitles={postTitles} /> </div> */}
-          {/* second row ends */}
+          {/* second row ie search results row ends */}
         <div className="flex justify-around border-t border-b items-center">
-          <a title="Home" className="hover:bg-black/80 font-bold p-1 hover:fill-white hover:text-white" href="/">
+          <Link title="Home" className={path==='home'?currentPathClassName:"font-bold p-1 hover:bg-black/80 hover:fill-white hover:text-white"} href="/">
            <svg width="40" height="30" viewBox="0 0 1024 1024">
             <path d="M972 520.8c-6.4 0-12-2.4-16.8-7.2L530.4 86.4c-4.8-4.8-11.2-8-18.4-8-6.4 0-12.8 2.4-18.4 8L68.8 512c-4.8 4.8-10.4 7.2-16.8 7.2s-12-2.4-16-6.4c-4.8-4-7.2-8.8-7.2-15.2-0.8-7.2 2.4-14.4 7.2-19.2L458.4 52.8c14.4-14.4 32.8-22.4 52.8-22.4s38.4 8 52.8 22.4L988.8 480c4.8 4.8 7.2 11.2 7.2 18.4 0 7.2-4 13.6-8.8 17.6-4.8 3.2-10.4 4.8-15.2 4.8z" />
             <path d="M637.6 998.4v-33.6h-33.6V904c0-51.2-41.6-92-92-92-51.2 0-92 41.6-92 92v60.8h-33.6v33.6H196.8c-40.8 0-73.6-32.8-73.6-73.6V509.6c0-13.6 10.4-24 24-24s24 10.4 24 24v415.2c0 14.4 11.2 25.6 25.6 25.6h175.2v-45.6c0-77.6 63.2-140 140-140s140 63.2 140 140v45.6h175.2c14.4 0 25.6-11.2 25.6-25.6V509.6c0-13.6 10.4-24 24-24s24 10.4 24 24v415.2c0 40.8-32.8 73.6-73.6 73.6H637.6z" />
             <path d="M604 998.4v-48h48v48h-48z m-232 0v-48h48v48h-48z" />
            </svg>
-          </a>
-          {path!=='writePost'?
-          <a title="Write a new post" className="hover:bg-black/80 font-bold p-1 hover:text-white hover:fill-white" href="/write-post">
+          </Link>
+      
+          <Link title="Write a new post" className={path==='writePost'?currentPathClassName:"font-bold p-1 hover:bg-black/80 hover:text-white hover:fill-white"} href="/write-post">
             <Write />
-          </a>
-          :''}
-          <a title="View all posts" className="hover:bg-black/80 font-bold p-1 hover:text-white hover:fill-white" href="/posts">
+          </Link>
+         
+          <Link title="View all posts" className={path==='allPosts'?currentPathClassName:"font-bold p-1 hover:bg-black hover:text-white hover:fill-white"} href="/posts">
           <svg width="40" height="30" viewBox="0 0 24 24">
            <path d="M7 5C5.34315 5 4 6.34315 4 8V16C4 17.6569 5.34315 19 7 19H17C18.6569 19 20 17.6569 20 16V12.5C20 11.9477 20.4477 11.5 21 11.5C21.5523 11.5 22 11.9477 22 12.5V16C22 18.7614 19.7614 21 17 21H7C4.23858 21 2 18.7614 2 16V8C2 5.23858 4.23858 3 7 3H10.5C11.0523 3 11.5 3.44772 11.5 4C11.5 4.55228 11.0523 5 10.5 5H7Z"/>
            <path fillRule="evenodd" clipRule="evenodd" d="M18.8431 3.58579C18.0621 2.80474 16.7957 2.80474 16.0147 3.58579L11.6806 7.91992L11.0148 11.9455C10.8917 12.6897 11.537 13.3342 12.281 13.21L16.3011 12.5394L20.6347 8.20582C21.4158 7.42477 21.4158 6.15844 20.6347 5.37739L18.8431 3.58579ZM13.1933 11.0302L13.5489 8.87995L17.4289 5L19.2205 6.7916L15.34 10.6721L13.1933 11.0302Z"/>
           </svg>
-          </a>
+          </Link>
           {path==='home'?
           <>{searchBarDisplay==='hidden'?
           <button title="Search" onClick={openSearchbar} className="hover:bg-black/80 font-bold p-1 stroke-black hover:stroke-white fill-white hover:fill-transparent hover:text-white">

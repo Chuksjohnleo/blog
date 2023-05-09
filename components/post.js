@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
 import icon from './images/photom.jpg';
 import CommentEditor from './commentEditor';
-import { useStyleRegistry } from 'styled-jsx';
+import Comment from './comment';
+
 
 export default function Post({post}){
-
+console.log(post.comments)
     const [date, setDate] = useState('');
     const [editor, setEditor] = useState('hidden');
     const [actionSectionzIndex, setActionSectionzIndex] = useState('');
@@ -84,7 +85,7 @@ export default function Post({post}){
                     <article dangerouslySetInnerHTML={{__html: post.postBody}}/>
                 </div>
             </section>
-            <section className={`w-full ${actionSectionzIndex}  bg-white/50 backdrop-blur sticky top-0 bottom-0`}>
+            {/* <section className={`w-full ${actionSectionzIndex}  bg-white/50 backdrop-blur sticky top-0 bottom-0`}>
                 {editor==='visible'?
                 <div>
                     <CommentEditor handleEditor={handleEditor} post={post} />
@@ -95,7 +96,7 @@ export default function Post({post}){
                   <button onClick={handleEditor} className='border-r flex-1 border-black active:bg-black active:text-white'>Comment</button>
                   <button className='flex-1 active:bg-black active:text-white'>Copylink</button>
                 </div>
-            </section>
+            </section> */}
             <section className='m-3 p-4'>
                 <h1 className='text-2xl font-bold'>Also read</h1><hr/>
                 <div className='border-l-4 m-2 p-4 border-black text-xl font-semibold bg-black/5'>
@@ -103,6 +104,34 @@ export default function Post({post}){
                 </div>
                 <div className='border-l-4 m-2 p-4 border-black text-xl font-semibold bg-black/5'>
                     <div>A cat cries as a chicken</div>
+                </div>
+            </section>
+            <section>
+              <h1 className='text-3xl font-bold'>Comments</h1>  <hr/>
+              <div className='bg-black/20 m-1'>
+                {post.comments.map((comment, i)=>{
+                   
+                return(<div className='bg-white my-2' key={comment.commentId}>
+                          <Comment 
+                            i={i} 
+                            shadow={icon} 
+                            post={post}
+                            comment={comment}
+                            />
+                      </div>)
+                })}
+              </div>
+            </section>
+            <section className={`w-full ${actionSectionzIndex}  bg-white/50 backdrop-blur sticky top-0 bottom-0`}>
+                {editor==='visible'?
+                <div className='h-[90vh] overflow-auto'>
+                    <CommentEditor handleEditor={handleEditor} post={post} />
+                </div>:
+                ''}
+                <div  className='w-full bg-white/70 backdrop-blur xSm:text-xl font-bold flex justify-around border py-1'>
+                  <button className='border-r flex-1 border-black active:bg-black active:text-white'>Like</button>
+                  <button onClick={handleEditor} className='border-r flex-1 border-black active:bg-black active:text-white'>Comment</button>
+                  <button className='flex-1 active:bg-black active:text-white'>Copylink</button>
                 </div>
             </section>
          </main>

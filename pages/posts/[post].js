@@ -15,7 +15,7 @@ export async function getStaticProps({params}){
       await client.connect();
       const db = client.db("blog");
       const category = db.collection('posts');
-      const commentCollection = db.collection('postsComments');
+      const commentCollection = db.collection('postComments');
      
       
       let body = await category.findOne({id:params.post},{projection:{_id:0}});

@@ -13,7 +13,7 @@
   position: relative;
 }
 #writePost .ql-container{
-  z-index: 98;
+  z-index: 40;
   background-color: white;
 }
 .ql-container.ql-disabled .ql-tooltip {
@@ -45,7 +45,11 @@
   text-align: left;
   white-space: pre-wrap;
   word-wrap: break-word;
-  
+  overflow-x: hidden;
+}
+
+.ql-editor *{
+  word-wrap: break-word;
 }
 
 #writePost .ql-editor{
@@ -662,8 +666,10 @@
   color: #f8f8f2;
   overflow: visible;
 }
+
 .ql-snow .ql-editor img {
   max-width: 100%;
+  width: 100%;
 }
 .ql-snow .ql-picker {
   color: #444;
@@ -877,7 +883,7 @@
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 99;
+  z-index: 41;
 }
 .ql-toolbar.ql-snow .ql-formats {
   margin-right: 15px;

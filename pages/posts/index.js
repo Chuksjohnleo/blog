@@ -56,7 +56,7 @@ export default function Home({posts}) {
         <title>Posts  TheBlogging</title>
       </Head>
       <div>
-          <Nav />
+          <Nav path={'allPosts'} />
           <div className='max-w-500'>
            <Posts posts={posts} />
           </div>
