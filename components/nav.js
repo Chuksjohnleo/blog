@@ -8,7 +8,7 @@ import SearchResult from './result';
 import Link from 'next/link';
 
 export default function Nav({path}) {
-console.log(path)
+
   const context = useContext(HomeContext);
   // console.log(context?.posts);
 

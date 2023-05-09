@@ -61,8 +61,7 @@ function changeBg() {
 
 
 function comment(){
-  location.href+'/kli'
-  console.log(location.href)
+  
  setProgress(true);
   fetch('/api/save-comment',{
     method:'post',
@@ -78,7 +77,7 @@ function comment(){
   .then(r=>r.json())
     .then(response=>{
       if(response.comment){
-        console.log(response)
+      
         setProgress(false);
         setStatus(true);
         localStorage.setItem('text',response.comment);
@@ -101,7 +100,7 @@ function comment(){
 useEffect(()=>{
   if(localStorage.getItem('userdata')){
     const userdata = JSON.parse(localStorage.getItem('userdata'));
-    console.log(userdata,userId,username);
+   
     setUserId(userdata.userId);
     setUsername(`${userdata.firstname} ${userdata.surname}`);
   }
@@ -112,7 +111,7 @@ useEffect(()=>{
 },[]);
 
 useEffect(()=>{
-  console.log(content)
+
   var encoder = new TextEncoder();
   var contentSize = encoder.encode(content).byteLength;
   console.log(contentSize/1024 + ' kb');

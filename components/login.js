@@ -37,7 +37,7 @@ export default function Login(){
                if(resp.userData) {
                 setStatus(true);
                 setProgress(false);
-                console.log(resp)
+              
                 const {surname, firstname, id} = resp.userData;
                 localStorage.setItem('userdata',JSON.stringify({
                     firstname: firstname,

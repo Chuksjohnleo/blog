@@ -25,7 +25,7 @@ export default function Comment({post, comment, shadow, i}){
     const userContext =  useContext(HomeContext);
 
     function resetReplies(reply){
-      //console.log(replies.push(reply))
+    
       if(!hasFetchedReplies){
        setReplyCount(replyCount+1);
        return getReplies();
@@ -59,14 +59,13 @@ export default function Comment({post, comment, shadow, i}){
           setHasFetchedReplies(true);
         }
        setLikedReplies(resp.liked);
-       console.log(resp.liked)
+      
       })
       .catch(e=>{
           console.log(e)
       })
     }
 
-// useEffect(()=>console.log(replies))
 
     function handleEditor(replyingTo){ 
        setEditor('visible');
@@ -75,8 +74,6 @@ export default function Comment({post, comment, shadow, i}){
           username: replyingTo.replier,
           userId: replyingTo.replierId
         })
-
-     console.log(replyingTo)
      }
     }
 

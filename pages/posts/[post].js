@@ -3,6 +3,7 @@ import Nav from "@/components/nav";
 import { MongoClient } from "mongodb";
 import shadow from '@/components/images/shadow.svg';
 import Footer from "@/components/footer";
+import { useRouter } from 'next/router';
 
 
 
@@ -21,7 +22,7 @@ export async function getStaticProps({params}){
       let body = await category.findOne({id: params.post}, {projection:{_id:0}});
       let comments = await commentCollection.find({postId: params.post},{projection:{_id:0}}).sort({_id: -1}).toArray()
       body.comments = comments;
-      console.log(comments,body)
+    
       post = body;
     } catch (e) {
       console.log(e)
@@ -44,7 +45,7 @@ export async function getStaticPaths() {
       const db = client.db("blog");
       const category = db.collection('posts');
       pathsArr = await category.find({},{projection:{_id:0, id:1}}).toArray();
-      // console.log(pathsArr)
+    
     } catch (e) {
       console.log(e)
     } finally {
@@ -56,13 +57,19 @@ export async function getStaticPaths() {
           params:{post:  path.id.toString()}
         }
     });
-
-// console.log(learning)
     return {paths, fallback: true}
   }
 
-export default function Learning({post}){
-    // console.log(post)
+export default function AllPosts({post}){
+    console.log(post)
+    const router = useRouter()
+
+    // If the page is not yet generated, this will be displayed
+    // initially until getStaticProps() finishes running
+    if (router.isFallback) {
+        return <div>Loading...</div>
+    }
+
     return(
     <>
       <div>

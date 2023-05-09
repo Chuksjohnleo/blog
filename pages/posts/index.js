@@ -18,12 +18,7 @@ try {
       const postCollection = db.collection('posts')
    
       posts = await postCollection.find({}, {projection:{_id: 0, postbody: 0}}).toArray()
-      console.log(posts);
-      //end
-      // const category = db.collection('Learning');
-      // posts = await category.find({},{projection:{_id:0,postBody:0}}).toArray();
-      // console.log(posts)
-
+    
     } catch (e) {
       console.log(e)
     } finally {
@@ -40,7 +35,7 @@ try {
 
 
 export default function Home({posts}) {
-  console.log(posts);
+
   const trendingPosts = [];
   const latestPosts = [];
 

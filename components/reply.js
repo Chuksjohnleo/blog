@@ -34,7 +34,6 @@ const userContext =  useContext(Context);
       return res.json()
     })
     .then(res=>{
-      console.log(res)
       if(res === 'done'){
         setLikes(likes+1);
         setLiked('yes');

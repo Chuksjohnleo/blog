@@ -95,7 +95,7 @@ function reply(){
 useEffect(()=>{
   if(localStorage.getItem('userdata')){
     const userdata = JSON.parse(localStorage.getItem('userdata'));
-    console.log(userdata,userId,username);
+  
     setUserId(userdata.userId);
     setUsername(`${userdata.firstname} ${userdata.surname}`);
   }
@@ -124,7 +124,6 @@ qlEditor.style = `
 },[]);
 
 useEffect(()=>{
-  console.log(content)
   var encoder = new TextEncoder();
   var contentSize = encoder.encode(content).byteLength;
   console.log(contentSize/1024 + ' kb');

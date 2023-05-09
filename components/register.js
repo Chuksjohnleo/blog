@@ -54,7 +54,7 @@ export default function Register(){
                 if(resp.status === 'yes'){
                     setStatus(true);
                     setProgress(false);
-                    console.log(resp)
+                   
                     localStorage.setItem('userdata',JSON.stringify({
                         firstname: firstname,
                         surname: surname,
@@ -62,7 +62,7 @@ export default function Register(){
                     }));
                     location.href = '/'
                 }
-                console.log(resp)
+               
             }
         ).catch(e=>{
             setProgress(false)

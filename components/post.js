@@ -6,7 +6,7 @@ import Comment from './comment';
 
 
 export default function Post({post}){
-console.log(post?.comments)
+console.log('post.comments in post.js',post?.comments)
     const [date, setDate] = useState('');
     const [editor, setEditor] = useState('hidden');
     const [actionSectionzIndex, setActionSectionzIndex] = useState('');
@@ -40,7 +40,6 @@ console.log(post?.comments)
                    if(resp.userData) {
                     setStatus(true);
                     setProgress(false);
-                    console.log(resp)
                     const {surname, firstname, id} = resp.userData;
                     localStorage.setItem('userdata',JSON.stringify({
                         firstname: firstname,

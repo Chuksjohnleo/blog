@@ -58,7 +58,7 @@ export default function Editor(){
     
     function getCategory(e){
      if(e) setCategory(e.target.value);
-       console.log(category)
+     
     };
 
     function getTitle(e){
@@ -92,11 +92,11 @@ export default function Editor(){
     function postRichText(){
     if(description.length<2){
       setError(true)
-      return console.log('eer')
+      return console.log('Little or No description')
     }
     if(category.length<2){
       setError(true)
-      return console.log('eer')
+      return console.log('No category')
     }
     // if('a'==='a')  return getLength()
     if(content.length<2){
@@ -121,7 +121,6 @@ export default function Editor(){
       })
     }).then(r=>r.json())
       .then(response=>{
-        console.log(response)
         if(response.postId){
           setStatus(true);
           setPostId(response.postId)
