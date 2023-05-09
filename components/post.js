@@ -6,7 +6,7 @@ import Comment from './comment';
 
 
 export default function Post({post}){
-console.log(post.comments)
+console.log(post?.comments)
     const [date, setDate] = useState('');
     const [editor, setEditor] = useState('hidden');
     const [actionSectionzIndex, setActionSectionzIndex] = useState('');
@@ -109,7 +109,7 @@ console.log(post.comments)
             <section>
               <h1 className='text-3xl font-bold'>Comments</h1>  <hr/>
               <div className='bg-black/20 m-1'>
-                {post.comments.map((comment, i)=>{
+                {post?.comments.map((comment, i)=>{
                    
                 return(<div className='bg-white my-2' key={comment.commentId}>
                           <Comment 
