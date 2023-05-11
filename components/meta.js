@@ -1,4 +1,6 @@
-export default function Meta({description, title, ogImage, url}){
+import React from "react"
+
+export default function MetaInfo({description, title, ogImage, url}){
     return(
         <>
          <link rel="shortcut icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
@@ -6,6 +8,7 @@ export default function Meta({description, title, ogImage, url}){
          <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
          <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
          <link rel="manifest" href="/favicon_io/site.webmanifest" />
+         <meta property="description" content={description} />
          <meta property="og:url" content={'https://blog-pearl-five.vercel.app/'} />
          <meta property="og:type" content="website" />
          <meta property="og:title" content={title} />
@@ -16,7 +19,7 @@ export default function Meta({description, title, ogImage, url}){
          <meta name="twitter:title" content={title} />
          <meta name="twitter:description" content={description} />
          <meta name="twitter:image" content={ogImage} />
-         <title>{title}</title>
+         {/* <title>{title}</title> */}
         </>
     )
 }

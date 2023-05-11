@@ -69,29 +69,70 @@ export default function AllPosts({post}){
     // If the page is not yet generated, this will be displayed
     // initially until getStaticProps() finishes running
     if (router.isFallback) {
+const title = 'Post | TheBlogging';
+const ogImage = '/favicon_io/favicon-32x32.png';
+const description = `Everything you have to know about a website
+and website development.`
         return (
         <>
           <Head>
-            <Meta 
+          <title>{title}</title> 
+         <link rel="shortcut icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
+         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+         <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+         <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+         <link rel="manifest" href="/favicon_io/site.webmanifest" />
+         <meta property="description" content={description} />
+         <meta property="og:url" content={'https://blog-pearl-five.vercel.app/'} />
+         <meta property="og:type" content="website" />
+         <meta property="og:title" content={title} />
+         <meta property="og:description" content={description} />
+         <meta property="og:image" content={ogImage} />
+         <meta name="twitter:site" content="@Chuksjohnleo" />
+         <meta name="twitter:card" content="summary_large_image" />
+         <meta name="twitter:title" content={title} />
+         <meta name="twitter:description" content={description} />
+         <meta name="twitter:image" content={ogImage} />
+            {/* <Meta 
              
               ogImage={'/favicon_io/favicon-32x32.png'} 
               title={'Chuksjohnleo | posts'} 
-              description={'Everything you have to know about a website'} />
+              description={'Everything you have to know about a website'} /> */}
            
           </Head>
           <div>Loading...</div>
         </>
         )
     }
+const title = post.title;
+const ogImage = post.images>0?post.images[0]:'/favicon_io/favicon-32x32.png';
+const description = post.description;
 
     return(
     <>
       <Head>
-            <Meta 
+            {/* <Meta 
              
               ogImage={post.images>0?post.images[0]:'/favicon_io/favicon-32x32.png'} 
               title={post.title} 
-              description={post.description} />
+              description={post.description} /> */}
+              <title>{title}</title> 
+         <link rel="shortcut icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
+         <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+         <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+         <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+         <link rel="manifest" href="/favicon_io/site.webmanifest" />
+         <meta property="description" content={description} />
+         <meta property="og:url" content={'https://blog-pearl-five.vercel.app/'} />
+         <meta property="og:type" content="website" />
+         <meta property="og:title" content={title} />
+         <meta property="og:description" content={description} />
+         <meta property="og:image" content={ogImage} />
+         <meta name="twitter:site" content="@Chuksjohnleo" />
+         <meta name="twitter:card" content="summary_large_image" />
+         <meta name="twitter:title" content={title} />
+         <meta name="twitter:description" content={description} />
+         <meta name="twitter:image" content={ogImage} />
           
       </Head>
       <div>
