@@ -16,6 +16,7 @@ export default function Comment({post, comment, shadow, i}){
     const [repliesIsLoading, isRepliesStillLoading] = useState('no');
     const [replies,setReplies] = useState([]);
     const [likedReplies, setLikedReplies] = useState([]);
+    const [commentArticleHeight, setCommentArticleHeight] = useState('h-[100px]')
     const [replyCount, setReplyCount] = useState(comment.replyCount)
     const [replyTo,setReplyTo] = useState({
       username: comment.commenter,
@@ -104,15 +105,16 @@ export default function Comment({post, comment, shadow, i}){
         <>
        <h1>{comment.commentId}</h1>
           <div>
-            <div >
-             <Link href="/#">
-                <Image alt={comment.commenter+"pics"} width={30} height={30} src={shadow} />
-                <em >{comment.commenter?.length<1?'NWANONENYI CHUKWUKA':comment.commenter}</em>
+            <div>
+             <Link className='flex gap-3 items-center' href="/#">
+                <Image className='rounded-2xl' alt={comment.commenter+"pics"} width={30} height={30} src={shadow} />
+                <em className='font-bold text-2xl break-words w-[80vw]'>{comment.commenter?.length<1?'NWANONENYI CHUKWUKA':comment.commenter}</em>
              </Link>
             
              <div>{date}</div>
             <hr/> 
-            <article dangerouslySetInnerHTML={{__html: comment.comment}} />
+            <article className={`${commentArticleHeight} overflow-hidden`} dangerouslySetInnerHTML={{__html: comment.comment}} />
+            {commentArticleHeight!=='' && comment.comment.length > 350 ?<button onClick={()=>setCommentArticleHeight('')} className='bg-black/20 m-3 p-2 font-bold'>See more</button>:''}
             <hr/>
             <div className='flex justify-around'>
               <button className='hover:bg-black/5 py-1 px-4'>29 Likes</button>
@@ -122,7 +124,7 @@ export default function Comment({post, comment, shadow, i}){
             <div className='flex justify-around font-bold'>
                <button className='hover:bg-black/5 py-1 px-4'>Like</button>
                <button className='hover:bg-black/5 py-1 px-4'>Reply</button>
-            </div>
+            </div><hr/>
             {
               replyCount > 0?<button disabled={ repliesIsLoading=== 'yes'?true:false } onClick={(e)=>{
                   getReplies(e);

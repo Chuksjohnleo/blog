@@ -4,6 +4,7 @@ import Nav from '@/components/nav';
 import HomePage from '@/components/homePage';
 import Footer from '@/components/footer';
 import Head from 'next/head';
+import Meta from '@/components/meta';
 
 import { MongoClient } from "mongodb";
 
@@ -39,7 +40,13 @@ export default function Home({posts}) {
   return (
     <HomeContextProvider>
       <Head>
-        <title>home page of TheBlogingBloggerBlog</title>
+            <Meta 
+             
+              ogImage={'/favicon_io/favicon-32x32.png'} 
+              title={'Home | TheBlogging'} 
+              description={`Everything you have to know about a website
+                and website development.`} />
+          
       </Head>
       <div>
           <Nav path='home' />

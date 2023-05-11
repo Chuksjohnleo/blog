@@ -2,6 +2,8 @@ import Post from "@/components/post";
 import Nav from "@/components/nav";
 import { MongoClient } from "mongodb";
 import shadow from '@/components/images/shadow.svg';
+import Meta from "@/components/meta";
+import Head from "next/head";
 import Footer from "@/components/footer";
 import { useRouter } from 'next/router';
 
@@ -61,17 +63,37 @@ export async function getStaticPaths() {
   }
 
 export default function AllPosts({post}){
-    console.log(post)
+   
     const router = useRouter()
 
     // If the page is not yet generated, this will be displayed
     // initially until getStaticProps() finishes running
     if (router.isFallback) {
-        return <div>Loading...</div>
+        return (
+        <>
+          <Head>
+            <Meta 
+             
+              ogImage={'/favicon_io/favicon-32x32.png'} 
+              title={'Chuksjohnleo | posts'} 
+              description={'Everything you have to know about a website'} />
+           
+          </Head>
+          <div>Loading...</div>
+        </>
+        )
     }
 
     return(
     <>
+      <Head>
+            <Meta 
+             
+              ogImage={post.images>0?post.images[0]:'/favicon_io/favicon-32x32.png'} 
+              title={post.title} 
+              description={post.description} />
+          
+      </Head>
       <div>
         <Nav />
           <Post shadow={shadow} post={post} />

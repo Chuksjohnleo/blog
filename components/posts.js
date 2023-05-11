@@ -5,7 +5,7 @@ import PostCard from './postCard';
 export default function Posts({posts}){
 
     return(
-        <section>
+        <main className='m-auto max-w-2xl break-words'>
          {
          posts.map(post=>{
            return (
@@ -16,6 +16,6 @@ export default function Posts({posts}){
         }
          )
          }
-        </section>
+        </main>
     )
 }

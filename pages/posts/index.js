@@ -4,6 +4,7 @@ import HomePage from '@/components/homePage';
 import Footer from '@/components/footer';
 import Head from 'next/head';
 import Posts from '@/components/posts';
+import Meta from '@/components/meta';
 
 import { MongoClient } from "mongodb";
 
@@ -36,19 +37,15 @@ try {
 
 export default function Home({posts}) {
 
-  const trendingPosts = [];
-  const latestPosts = [];
-
-  for(let i=0;i<10;i++){
-    if(i<7){
-      latestPosts.push(`latest post ${i}`)
-    }
-    trendingPosts.push(`trending post ${i}`)
-  }
   return (
     <>
       <Head>
-        <title>Posts  TheBlogging</title>
+            <Meta 
+             
+              ogImage={'/favicon_io/favicon-32x32.png'} 
+              title={'Chuksjohnleo | posts'} 
+              description={'Everything you have to know about a website'} />
+           
       </Head>
       <div>
           <Nav path={'allPosts'} />

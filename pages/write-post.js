@@ -2,8 +2,9 @@ import Image from 'next/image';
 import Nav from '@/components/nav';
 import Editor from '@/components/editor';
 import Footer from '@/components/footer';
-import styles from '../styles/myStyles.module.css';
-import Head from 'next/head'
+import Meta from '@/components/meta';
+import Head from 'next/head';
+
 
 export default function Home() {
   const trendingPosts = [];
@@ -18,14 +19,19 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Write Post | thBlogger</title>
-
+            <Meta 
+              
+              ogImage={'/favicon_io/favicon-32x32.png'} 
+              title={'Write a new post | TheBlogging'} 
+              description={`Everything you have to know about
+               a website.`} />
+           
       </Head>
       <div>
           <Nav path='writePost' />
-          <div className='max-w-500'>
-          <Editor />
-          </div>
+          <main className='m-auto max-w-3xl break-words'>
+           <Editor />
+          </main>
           <div>
             <Footer />
           </div>
