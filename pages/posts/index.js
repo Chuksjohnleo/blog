@@ -33,10 +33,7 @@ try {
     };
 }
 
-export const Metadata = {
-  title: '...',
-  description: '...',
-};
+
 
 
 export default function Home({posts}) {
