@@ -2,7 +2,6 @@ import Post from "@/components/post";
 import Nav from "@/components/nav";
 import { MongoClient } from "mongodb";
 import shadow from '@/components/images/shadow.svg';
-import Meta from "@/components/meta";
 import Head from "next/head";
 import Footer from "@/components/footer";
 import { useRouter } from 'next/router';

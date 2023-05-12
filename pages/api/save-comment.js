@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import {JSDOM} from 'jsdom';
 import { MongoClient } from "mongodb";
 const uri = process.env.DB_URI;
@@ -53,7 +54,9 @@ try{
   const extension = imageDataUrl.match(/\/([a-zA-Z0-9]+);/)[1];
 
   //get the filepath
-  const filePath = `./public/comment_uploads/${date}s${i}id${id.value.count}.${extension}`;
+  const filePath = path.join(process.cwd(), 'public', 'comment_uploads', `${date}s${i}id${id.value.count}.${extension}`);
+  console.log(filePath)
+  //const filePath = `./public/comment_uploads/${date}s${i}id${id.value.count}.${extension}`;
   //store the file in my filesystem
   fs.writeFile(filePath, imageData, 'base64', (err) => {
     if (err) {

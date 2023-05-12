@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import {JSDOM} from 'jsdom';
 import { MongoClient } from "mongodb";
 const uri = process.env.DB_URI;
@@ -42,7 +43,7 @@ try{
       { $inc: { count: 1 } },
       { upsert: true, returnDocument: "after" }
     );
-     
+     console.log(images.length)
   //extract the dataurl from the img tags and store the images in the server
   if(images.length > 0){
   images.forEach((image,i)=>{
@@ -50,10 +51,13 @@ try{
   const imageDataUrl = image.getAttribute('src');
   const imageData = imageDataUrl.split(',')[1];
   const extension = imageDataUrl.match(/\/([a-zA-Z0-9]+);/)[1];
-
+console.log('process1:',process.cwd())
   //get the filepath
-  const filePath = `./public/uploads/${date}s${i}id${id.value.count}.${extension}`;
+  const filePath = path.join(process.cwd(), 'public', 'uploads', `${date}s${i}id${id.value.count}.${extension}`);
+ 
+  //const filePath = `${process.cwd()}/public/uploads/${date}s${i}id${id.value.count}.${extension}`;
   //store the file in my filesystem
+  console.log('process2:',filePath)
   fs.writeFile(filePath, imageData, 'base64', (err) => {
     if (err) {
       console.error(err);

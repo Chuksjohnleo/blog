@@ -241,7 +241,7 @@ const formats = [
               </div>
               :''}
             <div className='flex justify-around'>
-                <button onClick={postRichText}  disabled={progress?true:false} className={'enabled:hover:fill-white border border-black m-3 p-3 text-2xl font-bold enabled:hover:bg-black disabled:bg-black/20 hover:text-white disabled:cursor-not-allowed'}>
+                <button onClick={postRichText}  disabled={progress?false:false} className={'enabled:hover:fill-white border border-black m-3 p-3 text-2xl font-bold enabled:hover:bg-black disabled:bg-black/20 hover:text-white disabled:cursor-not-allowed'}>
                  {progress===true?<Progress height='50px' color='black' status={status} />:'Post'}
                 </button>
                 <button onClick={openModal}  disabled={progress?true:false} className='border border-red-500 text-red-500 m-3 p-3 text-2xl font-bold enabled:hover:bg-red-500 enabled:hover:text-white disabled:bg-black/20 disabled:cursor-not-allowed'>Clear</button>
