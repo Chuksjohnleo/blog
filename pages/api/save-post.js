@@ -85,6 +85,7 @@ console.log('process1:',process.cwd())
     images: imagesSrc,
     category:req.body.category,
     theLength: req.body.theLength,
+    status: req.body.status,
     type: 'richText',
     postBody: `<div class='ql-container ql-snow' >
                 <div class='ql-editor'>

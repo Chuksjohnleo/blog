@@ -7,7 +7,7 @@ export default function Footer(){
     let date = new Date()
     return(
         <>
-         <footer className='bg-black/10 p-1 h-[100vh]'>
+         <footer className='bg-black/10 p-1'>
             <div>
               <div className='flex justify-center items-center'>
                 <Image alt='picture of the description' src={icon} height={30} width={40} />

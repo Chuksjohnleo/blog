@@ -12,14 +12,18 @@ const uri = process.env.DB_URI;
 
 export async function getServerSideProps() {
     const client = new MongoClient(uri);
-    let posts = [];
+    let posts = {
+      latest: [], 
+      trending: []
+    };
 try {
       await client.connect();
       const db = client.db("blog");
       const postCollection = db.collection('posts')
    
-      posts = await postCollection.find({}, {projection:{_id:0, postBody: 0}}).toArray();
-
+      posts.latest = await postCollection.find({}, {projection:{_id: 0, postbody: 0}}).toArray()
+      posts.trending = await postCollection.find({status: 'trending'}, {projection:{_id: 0, postbody: 0}}).toArray()
+ 
     } catch (e) {
       console.log(e)
     } finally {

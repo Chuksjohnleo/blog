@@ -5,7 +5,7 @@ import PostCard from './postCard';
 
 export default function HomePage({posts}){
     const context = useContext(HomeContext);
-    context.posts = posts;
+    context.posts = posts.latest;
 
 
     const [date, setDate] = useState('');
@@ -14,7 +14,7 @@ export default function HomePage({posts}){
     context.handlePosts = setThePosts;
 
     useEffect(()=>{
-     let date = new Date();
+     const date = new Date();
      setDate(date.toDateString());
     },[]);
 
@@ -42,7 +42,7 @@ export default function HomePage({posts}){
               <h1 className='text-4xl m-2 text-center font-extrabold font-sans'>Trending</h1>
               <hr/>
               {
-              theposts.map((post)=>{
+              posts.trending.map((post)=>{
                 return(
                   <div key={post.id}>
                     <PostCard post={post} />
