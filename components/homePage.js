@@ -8,15 +8,9 @@ export default function HomePage({posts}){
     context.posts = posts.latest;
 
 
-    const [date, setDate] = useState('');
     const [theposts, setThePosts] = useState(context.posts);
 
     context.handlePosts = setThePosts;
-
-    useEffect(()=>{
-     const date = new Date();
-     setDate(date.toDateString());
-    },[]);
 
     return(
         <>

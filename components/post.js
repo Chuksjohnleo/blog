@@ -6,12 +6,14 @@ import Comment from './comment';
 
 
 export default function Post({post}){
+
 console.log('post.comments in post.js',post?.comments)
     const [date, setDate] = useState('');
     const [editor, setEditor] = useState('hidden');
     const [comments, setComments] = useState(post.comments);
     const [actionSectionzIndex, setActionSectionzIndex] = useState('');
-
+    const [userData, setUserData] = useState({});
+    
     function handleEditor(){
         if(editor === 'hidden'){
             setEditor('visible');
@@ -85,8 +87,8 @@ console.log('post.comments in post.js',post?.comments)
                 <div className='flex gap-3 items-center'>
                   <Image alt={'Chukwuka Nwanonenyi'} src={icon}  height={30} width={30} />
                   <div className='ml-3'>
-                    <em>By</em> 
-                    <em className='font-medium underline'>{post.poster}</em></div>
+                    <em> By </em> 
+                    <em className='font-medium underline'> {post.poster} </em></div>
                 </div>
             </section>
           

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import Progress from "./progress";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
-export default function Login(){
+export default function Login(){  
+    const router = useRouter();
 
     const [email,setEmail] = useState('nwa@gmail.com');
     const [password,setPassword] = useState('mypass');
@@ -44,7 +46,7 @@ export default function Login(){
                     surname: surname,
                     userId: id
                 }));
-                // location.href = '/'
+                router.push('/');
              }
             }
         ).catch(e=>{

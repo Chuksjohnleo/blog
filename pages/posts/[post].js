@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const uri = process.env.DB_URI;
 
-export async function getStaticProps({params}){
+export async function getServerSideProps({params, res}){
     const client = new MongoClient(uri);
     let post;
     try {
@@ -22,15 +22,23 @@ export async function getStaticProps({params}){
       
       let body = await category.findOne({id: params.post}, {projection:{_id:0}});
       let comments = await commentCollection.find({postId: params.post},{projection:{_id:0}}).sort({_id: -1}).toArray()
-      body.comments = comments;
-    
-      post = body;
+      if(body !== null){
+        body.comments = comments;
+        post = body;
+      }
     } catch (e) {
       console.log(e)
     } finally {
       await client.close();
     }
-
+     if(post === null || post === undefined){
+        console.log(post,'ll')
+        res.writeHead(302, {location: '/404'})
+        res.end()
+        return {
+          props: {}
+        };
+     }
     return {
       props: {
        post
@@ -38,7 +46,8 @@ export async function getStaticProps({params}){
     };
 }
 
-export async function getStaticPaths() {
+/*
+export async function getServerSidePaths() {
     const client = new MongoClient(uri);
     let pathsArr;
     try {
@@ -59,7 +68,7 @@ export async function getStaticPaths() {
         }
     });
     return {paths, fallback: true}
-  }
+  }*/
 
 export default function AllPosts({post}){
    

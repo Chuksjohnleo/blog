@@ -1,9 +1,13 @@
 import { useEffect,useState } from "react";
 import Progress from "./progress";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 
 export default function Register(){
+
+    const router = useRouter();
+    
     const [firstname, setFirstname] = useState('Chukwuka');
     const [surname, setSurname] = useState('Agina');
     const [gender, setGender] = useState('Male');
@@ -60,7 +64,7 @@ export default function Register(){
                         surname: surname,
                         userId: resp.userId
                     }));
-                    location.href = '/'
+                    router.push('/');
                 }
                
             }

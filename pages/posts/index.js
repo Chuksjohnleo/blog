@@ -8,6 +8,7 @@ import Meta from '@/components/meta';
 import { Metadata } from 'next';
 
 import { MongoClient } from "mongodb";
+import { HomeContextProvider } from '@/context/context';
 
 const uri = process.env.DB_URI;
 
@@ -68,7 +69,8 @@ export default function Home({posts}) {
          <meta name="twitter:description" content={description} />
          <meta name="twitter:image" content={ogImage} />
       </Head>
-      <div>
+      <HomeContextProvider>
+       <div>
           <Nav path={'allPosts'} />
           <div className='max-w-500'>
            <Posts posts={posts} />
@@ -76,7 +78,8 @@ export default function Home({posts}) {
           <div>
             <Footer />
           </div>
-      </div>
+       </div>
+      </HomeContextProvider>
     </>
   )
 }
