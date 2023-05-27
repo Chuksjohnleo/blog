@@ -16,7 +16,8 @@ export default function Comment({post, comment, shadow, i}){
     const [repliesIsLoading, isRepliesStillLoading] = useState('no');
     const [replies,setReplies] = useState([]);
     const [likedReplies, setLikedReplies] = useState([]);
-    const [commentArticleHeight, setCommentArticleHeight] = useState('h-[100px]')
+    const [commentArticleHeight, setCommentArticleHeight] = useState('h-[100px]');
+    const [collapse, setCollapse] = useState(false);
     const [replyCount, setReplyCount] = useState(comment.replyCount)
     const [replyTo,setReplyTo] = useState({
       username: comment.commenter,
@@ -114,7 +115,14 @@ export default function Comment({post, comment, shadow, i}){
              <div>{date}</div>
             <hr/> 
             <article className={`${commentArticleHeight} overflow-hidden`} dangerouslySetInnerHTML={{__html: comment.comment}} />
-            {commentArticleHeight!=='' && comment.comment.length > 350 ?<button onClick={()=>setCommentArticleHeight('')} className='bg-black/20 m-3 p-2 font-bold'>See more</button>:''}
+            {collapse===true?<button onClick={()=>{
+              setCommentArticleHeight('h-[100px]');
+              setCollapse(false);
+              }} className='bg-black/20 m-3 p-2 font-bold'>Collapse</button>:''}
+            {commentArticleHeight!=='' && comment.comment.length > 350 ?<button onClick={()=>{
+              setCommentArticleHeight('');
+              setCollapse(true);
+              }} className='bg-black/20 m-3 p-2 font-bold'>See more</button>:''}
             <hr/>
             <div className='flex justify-around'>
               <button className='hover:bg-black/5 py-1 px-4'>29 Likes</button>

@@ -229,7 +229,6 @@ export default function Editor(){
     
     function handleEditorText(value){
         setContent(value);
-        setContentLength(getLength())
     }
 
     function handleStatus(value){
@@ -267,14 +266,34 @@ useEffect(()=>{
   if(description.length>=150 && description.length<=200){
    setDescriptionCountColour('text-green-800');
   }
-},[description])
+},[description]);
+
+useEffect(()=>{
+  setContentLength(getLength())
+},[content])
     
    function getLength(){
       const parser = new DOMParser();
       const doc = parser.parseFromString(content,"text/html");
-      const body = doc.childNodes[0].innerText
- 
-      return body.length;
+      const body = doc.childNodes[0].innerText;
+      function countWords(str) {
+        // Remove leading and trailing white spaces
+        str = str.trim();
+        
+        // If the string is empty, return 0
+        if (str === '') {
+          return 0;
+        }
+        
+        // Split the string by whitespace
+        var words = str.split(/\s+/);
+        
+        // Return the number of words
+        return words.length;
+      }
+      
+      // Example usage
+      return  countWords(body);
    }
 
 
@@ -434,8 +453,12 @@ const formats = [
                formats={formats}
                modules={modules}
                placeholder='Write Post Here'
-               onChange={handleEditorText}
-               />
+               onChange={handleEditorText} 
+              />
+            </div>
+            <div className='font-bold'>
+              <span> {contentLength} </span>
+              <span> words </span>
             </div>
             {progress===true?
               <div className='text-center text-3xl font-bold  animate-pulse'>

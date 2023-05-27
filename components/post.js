@@ -9,6 +9,7 @@ export default function Post({post}){
 console.log('post.comments in post.js',post?.comments)
     const [date, setDate] = useState('');
     const [editor, setEditor] = useState('hidden');
+    const [comments, setComments] = useState(post.comments);
     const [actionSectionzIndex, setActionSectionzIndex] = useState('');
 
     function handleEditor(){
@@ -19,6 +20,10 @@ console.log('post.comments in post.js',post?.comments)
             setEditor('hidden');
             setActionSectionzIndex('')
         }
+    }
+
+    function addToComments(newComment){
+        setComments(prevComments=>[...prevComments, newComment])
     }
 
     function countViewers(){
@@ -65,17 +70,23 @@ console.log('post.comments in post.js',post?.comments)
         <>
          <main className='m-auto max-w-2xl break-words'>
             <section className='mx-4 p-4'>
-                <h1 className='my-3 py-4 text-3xl border-black font-bold'>{post.title}</h1>
-                <div className='flex justify-center'>
+                <div className='flex justify-center relative'>
                   {post.images.length>0?
-                  <img className='max-h-[80vh]' alt={'thumbnal'} src={post.images[0]} />:
-                  <Image className='w-full h-auto max-h-[80vh]' alt={'Chukwuka Nwanonenyi'} src={icon}  height={200} width={200} />
+                  <img className='max-h-[80vh] object-cover' alt={'thumbnail'} src={post.images[0]} />:
+                  <Image className='w-full object-cover h-[50vh]' alt={'Chukwuka Nwanonenyi'} src={icon}  height={200} width={200} />
                   }
+                   <h1 className='flex backdrop-blur-sm justify-center items-center h-[50vh] bg-white/20 p-4 w-full absolute py-4 text-4xl border-black font-bold'>
+                    <span>{post.title}</span>
+                   </h1>
                 </div>
-                <div className='mt-2 mb-2'><strong>{date} | {post.theLength}</strong></div>
+                <div className='mt-2 mb-2'>
+                   <strong>{date} | {post.theLength} words(approx.)</strong>
+                </div>
                 <div className='flex gap-3 items-center'>
                   <Image alt={'Chukwuka Nwanonenyi'} src={icon}  height={30} width={30} />
-                  <div className='ml-3'><em>By</em> <em className='font-medium underline'>{post.poster}</em></div>
+                  <div className='ml-3'>
+                    <em>By</em> 
+                    <em className='font-medium underline'>{post.poster}</em></div>
                 </div>
             </section>
           
@@ -106,9 +117,11 @@ console.log('post.comments in post.js',post?.comments)
                 </div>
             </section>
             <section>
-              <h1 className='text-3xl font-bold'>Comments</h1>  <hr/>
+              <h1 className='text-3xl font-bold'>
+                <span> Comments </span> <span> {comments.length} </span>
+              </h1>  <hr/>
               <div className='bg-black/20 m-1'>
-                {post?.comments.map((comment, i)=>{
+                {comments.map((comment, i)=>{
                    
                 return(<div className='bg-white my-2' key={comment.commentId}>
                           <Comment 
@@ -124,7 +137,7 @@ console.log('post.comments in post.js',post?.comments)
             <section className={`w-full ${actionSectionzIndex}  bg-white/50 backdrop-blur sticky top-0 bottom-0`}>
                 {editor==='visible'?
                 <div className='h-[90vh] overflow-auto'>
-                    <CommentEditor handleEditor={handleEditor} post={post} />
+                    <CommentEditor addToComments={addToComments} handleEditor={handleEditor} post={post} />
                 </div>:
                 ''}
                 <div  className='w-full bg-white/70 backdrop-blur xSm:text-xl font-bold flex justify-around border py-1'>

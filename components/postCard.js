@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Image from 'next/image';
-import icon from './images/photom.jpg';
+import icon from './images/android-chrome-192x192.png';
 import { useContext } from 'react';
 import { HomeContext } from '@/context/context';
 import Link from 'next/link';
@@ -28,7 +28,7 @@ export default function PostCard({post}){
                     {post.description}
                   </Link>
                 </div>
-                <div className='mt-2 mb-2'><strong>{date} | {post.theLength}</strong></div>
+                <div className='mt-2 mb-2'><strong>{date} | {post.theLength} words(approx.)</strong></div>
                 <div className='flex justify-center'>
                   <Link href={`/posts/${post.id}`}>
                      {post.images.length>0?

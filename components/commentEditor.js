@@ -9,19 +9,11 @@ const ReactQuill = dynamic(import('react-quill'), {ssr: false  });
 
 export default function CommentEditor({addToComments, post, handleEditor}) {
  
-  const [content, setContent] = useState(`wait  - compiling...
-  event - compiled client and server successfully in 4.9s (314 modules)
-  wait  - compiling...
-  event - compiled client and server successfully in 3.7s (314 modules)
-  wait  - compiling...
-  event - compiled client and server successfully in 3.9s (314 modules)
-
-  Comments nke m
-  `);
-  const [userId,setUserId] = useState('U1');
-  const [username,setUsername] = useState('Chuks Commenter');
-  const [status,setStatus] = useState(false);
-  const [progress,setProgress] = useState(false);
+  const [content, setContent] = useState('');
+  const [userId, setUserId] = useState('U1');
+  const [username, setUsername] = useState('Chuks Commenter');
+  const [status, setStatus] = useState(false);
+  const [progress, setProgress] = useState(false);
  
   
   

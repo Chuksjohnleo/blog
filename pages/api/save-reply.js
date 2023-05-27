@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const client = new MongoClient(uri);
 
     await client.connect();
-    const db = client.db("posts");
+    const db = client.db("blog");
     const counter = db.collection("replyCounter");
 
     // const c = db.collection('Learning')
