@@ -339,6 +339,10 @@ useEffect(()=>{
         setError({status: true, info: 'No title'})
         return;
     }
+    if(contentImageCount>0){
+      setError({status: true, info: 'Uploading images not yet available.'})
+      return;
+    }
     setProgress(true);
     if(error.status === true)setError({status: false, info: ''});
     fetch('/api/edit-post',{

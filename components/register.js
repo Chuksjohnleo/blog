@@ -78,19 +78,19 @@ export default function Register(){
             <div className='flex flex-col justify-center items-center'>
                 <div className='m-2 flex justify-around gap-3 xSm:flex-row flex-col w-full'>
                     <label className="font-bold flex-none border p-1 w-[100px] bg-black/10">First name: </label>
-                    <input value={firstname} onInput={(e)=>handleFirstname(e)} className='text-center border flex-1 p-1' type={'text'} name='firstname' placeholder="First Name" />
+                    <input value={firstname} onInput={(e)=>handleFirstname(e)} className='text-center w-full border flex-1 p-1' type={'text'} name='firstname' placeholder="First Name" />
                 </div>
                 <div className='m-2 flex justify-around gap-3 xSm:flex-row flex-col w-full'>
                     <label className="font-bold flex-none border p-1 w-[100px] bg-black/10">Surname: </label>
-                    <input  value={surname}  onInput={(e)=>handleSurname(e)} className='text-center border flex-1 p-1' type={'text'} name='surname' placeholder="Surname" />
+                    <input  value={surname}  onInput={(e)=>handleSurname(e)} className='text-center border w-full flex-1 p-1' type={'text'} name='surname' placeholder="Surname" />
                 </div>
                 <div className='m-2 flex justify-around gap-3 xSm:flex-row flex-col w-full'>
                     <label className="font-bold flex-none border p-1 w-[100px] bg-black/10">Email: </label> 
-                    <input  value={email}  onInput={(e)=>handleEmail(e)} className='text-center border flex-1 p-1' type={'text'} name='email' placeholder="Email" />
+                    <input  value={email}  onInput={(e)=>handleEmail(e)} className='text-center w-full border flex-1 p-1' type={'text'} name='email' placeholder="Email" />
                 </div>
                 <div className='m-2 flex justify-around gap-3 xSm:flex-row flex-col w-full'>
                     <label className="font-bold flex-none border p-1 w-[100px] bg-black/10">Gender: </label>
-                    <div className="text-center border flex-1 p-1 flex justify-around">
+                    <div className="text-center border flex-1 p-1 w-full flex justify-around">
                       <div>
                         <input value="male" onInput={(e)=>handleGender(e)} type='radio' name='gender' />
                         <span> Male </span>
@@ -105,7 +105,7 @@ export default function Register(){
                 </div>
                 <div className='m-2 flex justify-around gap-3 xSm:flex-row flex-col w-full'>
                     <label className="font-bold flex-none border p-1 w-[100px] bg-black/10">Password: </label>
-                    <input value={password} onInput={(e)=>handlePassword(e)} className='text-center border flex-1 p-1' type={'text'} name='password' placeholder="Password" />
+                    <input value={password} onInput={(e)=>handlePassword(e)} className='text-center border w-full flex-1 p-1' type={'text'} name='password' placeholder="Password" />
                 </div>
                 {progress?<div className="animate-pulse font-bold">Registering you. . .</div>:''}
                 <div className="my-6">
