@@ -16,7 +16,7 @@ export default function HomePage({posts}){
         <>
          <main className='m-auto max-w-2xl'>
             <section>
-                <h1 className='p-5 m-1 text-6xl border-b-2 border-black text-center font-bold'>Home of the best bloggers in town</h1>
+                <h1 className='p-5 m-1 text-6xl border-b-2 border-black text-center font-bold break-words'>Home of the best bloggers in town</h1>
             </section>
             <section className='p-4'>
                 <h1 className='text-4xl m-2 text-center font-extrabold font-sans' >Latest</h1>

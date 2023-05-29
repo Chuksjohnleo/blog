@@ -59,11 +59,7 @@ export default function Register(){
                     setStatus(true);
                     setProgress(false);
                    
-                    localStorage.setItem('userdata',JSON.stringify({
-                        firstname: firstname,
-                        surname: surname,
-                        userId: resp.userId
-                    }));
+                    localStorage.setItem('userdata',JSON.stringify(resp.userData));
                     router.push('/');
                 }
                

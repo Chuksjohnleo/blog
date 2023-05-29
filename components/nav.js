@@ -129,7 +129,7 @@ export default function Nav({path}) {
           </div>
           <div className="font-extrabold">TheBlogging</div>
           <div>
-            <button title="Profile" className="hover:bg-black/60 hover:text-white hover:fill-white p-2">
+            <Link href='/profile' title="Profile" className="hover:bg-black/60 block hover:text-white hover:fill-white p-2">
             <svg height="30" width="30" viewBox="0 0 248.349 248.349">
               <g>
                 <g>
@@ -147,7 +147,7 @@ export default function Nav({path}) {
                 </g>
               </g>
             </svg>
-            </button>
+            </Link>
             {/* <Image alt='picture of the description' src={icon} height={40} width={40} /> */}
           </div>
         </div>

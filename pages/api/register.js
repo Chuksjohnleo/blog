@@ -29,8 +29,10 @@ try {
           joined: Date(),
         });
 
+        const userData = await users.findOne({ id: "U"+id.value.count }, { projection: { _id:0, password: 0}})
+
         console.log(data)
-        res.json({status:'yes',userId: "U"+id.value.count});
+        res.json({status:'yes',userData: userData});
        
     } catch (e) {
       res.json("error");

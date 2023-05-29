@@ -8,25 +8,24 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(import('react-quill'), {ssr: false  });
 
 
-export default function Editor(){
+export default function PostEditor({post}){
     const [content, setContent] = useState('');
     const [title,setTitle] = useState('');
     const [description, setDescription] = useState('description');
     const [descriptionCounter,setDescriptionCounter] = useState(0);
-    const [category,setCategory] = useState('News');
+    const [category, setCategory] = useState(post.category);
     const [contentLength, setContentLength] = useState(0);
     const [date, setDate] = useState('');
     const [modal,setModal] = useState('closed');
     const [modalStatus, setModalStatus] = useState('no');
     const [error, setError] = useState({status:false, info: ''});
     const [progress,setProgress] = useState(false);
-    const [status,setStatus] = useState(false);
+    const [status, setStatus] = useState(false);
     const [user, setUser] = useState({username: 'Ck N', userId: 'U1'});
     const [postId, setPostId] = useState('');
     const [descriptionCountColour, setDescriptionCountColour] = useState('text-blue-800');
     const [postStatus, setPostStatus] = useState('');
-    const [ contentImageCount,  setContentImageCount] = useState(0)
-
+    const [ contentImageCount,  setContentImageCount] = useState(post.images.length)
 
     //start 
     
@@ -180,6 +179,14 @@ export default function Editor(){
   ]
    
     function getRandomBlogPost() {
+      const confirmBeforeAutofill = confirm(
+        `
+        Do you really want to autofill?
+        This will clear previous post content, description 
+        and title and replace it with new ones. 
+        Click OK if you still want to proceed
+      `);
+      if(!confirmBeforeAutofill) return;
       const randomIndex = Math.floor(Math.random() * blogPosts.length);
       const randomPostIndex = Math.floor(Math.random() * postsArray.length)
       console.log(blogPosts.length, randomIndex)
@@ -272,6 +279,7 @@ useEffect(()=>{
 },[description]);
 
 useEffect(()=>{
+    console.log(postStatus)
   setContentLength(getLength())
 },[content])
     
@@ -282,7 +290,6 @@ useEffect(()=>{
       const contentText = body.innerText;
       const images = body.querySelectorAll('img');
       setContentImageCount(images.length);
-
       function countWords(str) {
         // Remove leading and trailing white spaces
         str = str.trim();
@@ -334,18 +341,18 @@ useEffect(()=>{
     }
     setProgress(true);
     if(error.status === true)setError({status: false, info: ''});
-    fetch('/api/save-post',{
+    fetch('/api/edit-post',{
       method:'post',
       headers:{'Content-Type':'application/json'},
       body : JSON.stringify({
-        title:title,
+        postId: post.id,
+        title: title,
         description: description,
         post: content,
-        poster: user.username,
-        posterId: user.userId,
         status: postStatus,
+        theLength: getLength(),
         category: category,
-        theLength: getLength()
+        images: post.images
       })
     }).then(r=>r.json())
       .then(response=>{
@@ -363,6 +370,15 @@ useEffect(()=>{
     }
 
     useEffect(()=>{
+        setTitle(post.title);
+        setContent(post.postBody);
+        setDescription(post.description);
+        setCategory(post.category);
+        if(post.status==='trending'){
+            document.getElementById('status').click();
+            // document.getElementById('status').checked = true;
+        }
+        console.log(category, post.category)
      let date = new Date();
      setDate(date.toDateString());
     },[]);
@@ -409,7 +425,7 @@ const formats = [
                  postId={postId} 
                  handler={statusHandler} 
                  />:''}
-            <h1 className='font-extrabold text-3xl m-3'>Write Post</h1>
+            <h1 className='font-extrabold text-3xl m-3'>Edit Post</h1>
             {error.status === true?
                 <div style={{zIndex:102}} className='z-50 bg-white text-red-800 sticky text-center text-xl font-bold border m-2 top-2'>
                    <div>An error occurred please retry</div>
@@ -419,7 +435,7 @@ const formats = [
             :''}
        <div className='flex flex-col items-center justify-center mb-2'>
          <label className='text-2xl m-2' htmlFor="categories">Choose category</label>
-         <select className='border-2 focus:outline-none focus:shadow focus:shadow-black' value={category} onChange={(e)=>getCategory(e)} id="categories" name="categories">
+         <select value={category} className='border-2 focus:outline-none focus:shadow focus:shadow-black' onChange={(e)=>getCategory(e)} id="categories" name="categories">
           <optgroup label="categories">
             <option value={'none'}>None</option>
             <option value={'News'}>News</option>
@@ -479,7 +495,9 @@ const formats = [
                 <label htmlFor='status'>Trending</label>
                 <input id='status' onChange={(e)=>handleStatus(e.target.checked)} type='checkbox' />
               </div>
-            <div className='flex justify-around m-1'><button className='border-2 p-2 font-extrabold text-2xl active:bg-black active:text-white' onClick={getRandomBlogPost}>Auto fill</button></div>
+            <div className='flex justify-around m-1'>
+                <button className='border-2 p-2 font-extrabold text-2xl active:bg-black active:text-white' onClick={getRandomBlogPost}>Auto fill</button>
+            </div>
             <div className='flex justify-around'>
                 <button onClick={submitPost}  disabled={progress?false:false} className={'enabled:hover:fill-white border border-black m-3 p-3 text-2xl font-bold enabled:hover:bg-black disabled:bg-black/20 hover:text-white disabled:cursor-not-allowed'}>
                  {progress===true?<Progress height='50px' color='black' status={status} />:'Post'}
