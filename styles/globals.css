@@ -11,14 +11,14 @@
  --other-color: white;
  --color: black;
 }
-
+/* 
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: black;
     --other-color: black;
     --color: white;
   }
-}
+} */
 
 
 body {
