@@ -94,7 +94,11 @@ Promise.all(promises)
     category:req.body.category,
     theLength: req.body.theLength,
     status: req.body.status,
-    postBody: req.body.post,
+    postBody: `<div class='ql-container ql-snow' >
+    <div class='ql-editor'>
+       ${req.body.post}
+    </div>
+   </div>`,
     images: []
   }
  }
